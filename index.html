@@ -1,0 +1,2766 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bo'laklarga Ajratish Sehri: Katta Ishlarni Kichik Qismlarga Bo'lish | 10 Bosqichli O'yinli Kurs</title>
+  <meta name="description" content="8-13 yoshli bolalar uchun katta muammolarni kichik va oson bo'laklarga ajratib hal qilish, hayotiy misollar va dasturlash amaliyotlari bo'yicha interaktiv o'yinli taqdimot.">
+  <style>
+    /* ==========================================================================
+       1. GLOBAL RESET & DESIGN TOKENS
+       ========================================================================== */
+    :root {
+      --bg-space: #0b0f19;
+      --bg-card: rgba(19, 26, 42, 0.88);
+      --bg-card-border: rgba(255, 255, 255, 0.12);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      /* Vibrant Kid-Friendly Color Accents */
+      --color-energy: #f59e0b;
+      --color-energy-glow: rgba(245, 158, 11, 0.4);
+      --color-motion: #06b6d4;
+      --color-motion-glow: rgba(6, 182, 212, 0.4);
+      --color-sensor: #10b981;
+      --color-sensor-glow: rgba(16, 185, 129, 0.4);
+      --color-danger: #ef4444;
+      --color-purple: #8b5cf6;
+      --color-gold: #fbbf24;
+      --color-orange: #f97316;
+      --color-pink: #ec4899;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-full: 9999px;
+
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --transition-smooth: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-space);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 60%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Cosmic Grid */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 36px 36px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ==========================================================================
+       2. TOP NAVIGATION & HEADER
+       ========================================================================== */
+    .app-header {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--bg-card-border);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    .brand-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-subtitle {
+      font-size: 0.72rem;
+      color: #38bdf8;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* 10-Step Progress Track */
+    .progress-track {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 5px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
+    .step-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid transparent;
+      color: var(--text-muted);
+      font-weight: 800;
+      font-size: 0.72rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      flex-shrink: 0;
+    }
+
+    .step-dot:hover {
+      background: rgba(255, 255, 255, 0.22);
+      color: #fff;
+      transform: scale(1.12);
+    }
+
+    .step-dot.active {
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      color: #fff;
+      border-color: #93c5fd;
+      box-shadow: 0 0 14px rgba(6, 182, 212, 0.6);
+      transform: scale(1.18);
+    }
+
+    .step-dot.completed {
+      background: rgba(16, 185, 129, 0.22);
+      border-color: var(--color-sensor);
+      color: var(--color-sensor);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .icon-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: scale(1.08);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.92);
+    }
+
+    /* ==========================================================================
+       3. SLIDE DECK WORKSPACE
+       ========================================================================== */
+    .presentation-container {
+      position: relative;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      z-index: 1;
+      perspective: 1200px;
+    }
+
+    .slide-viewport {
+      width: 100%;
+      max-width: 1100px;
+      min-height: 590px;
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      padding: 22px 28px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(60px) scale(0.96);
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0) scale(1);
+      position: relative;
+    }
+
+    .slide-header {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .slide-badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .slide-title {
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .slide-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 4px auto 0;
+      line-height: 1.4;
+    }
+
+    .interactive-board {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Common Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: var(--radius-full);
+      font-size: 0.95rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary { background: linear-gradient(135deg, #3b82f6, #06b6d4); color: #fff; }
+    .btn-energy { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
+    .btn-success { background: linear-gradient(135deg, #10b981, #059669); color: #fff; }
+    .btn-secondary { background: rgba(255, 255, 255, 0.1); color: var(--text-main); border: 1px solid rgba(255, 255, 255, 0.15); }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.2); }
+
+    /* ==========================================================================
+       4. SLIDE 1: MUAMMONI KO'RISH (THE GIANT PROBLEM)
+       ========================================================================== */
+    .s1-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .s1-stage {
+      width: 100%;
+      height: 300px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .giant-monolith {
+      width: 270px;
+      height: 210px;
+      background: linear-gradient(145deg, #334155, #1e293b);
+      border-radius: 20px;
+      border: 3px dashed #64748b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      position: relative;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      z-index: 2;
+    }
+
+    .giant-monolith.heavy-shake {
+      animation: heavyShake 0.4s ease-in-out infinite;
+    }
+
+    @keyframes heavyShake {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(-3px, 2px) rotate(-1deg); }
+      75% { transform: translate(3px, -2px) rotate(1deg); }
+    }
+
+    .monolith-warning-badge {
+      position: absolute;
+      top: -12px;
+      background: #ef4444;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
+    }
+
+    .monolith-smoke {
+      position: absolute;
+      font-size: 1.5rem;
+      animation: floatSmoke 2s infinite ease-out;
+      opacity: 0.7;
+    }
+
+    @keyframes floatSmoke {
+      0% { transform: translateY(0) scale(0.8); opacity: 0.8; }
+      100% { transform: translateY(-45px) scale(1.4); opacity: 0; }
+    }
+
+    .split-modules-container {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0; left: 0;
+      padding: 16px;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 3;
+    }
+
+    .split-module-card {
+      width: 30%;
+      height: 230px;
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      animation: popInBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes popInBounce {
+      0% { transform: scale(0.4) translateY(50px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .split-module-card.energy {
+      background: linear-gradient(145deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+      border: 2px solid var(--color-energy);
+      box-shadow: 0 0 25px var(--color-energy-glow);
+    }
+    .split-module-card.motion {
+      background: linear-gradient(145deg, rgba(6, 182, 212, 0.15), rgba(6, 182, 212, 0.05));
+      border: 2px solid var(--color-motion);
+      box-shadow: 0 0 25px var(--color-motion-glow);
+    }
+    .split-module-card.sensor {
+      background: linear-gradient(145deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+      border: 2px solid var(--color-sensor);
+      box-shadow: 0 0 25px var(--color-sensor-glow);
+    }
+
+    .laser-slash-line {
+      position: absolute;
+      height: 6px;
+      background: #00ffff;
+      box-shadow: 0 0 20px #00ffff, 0 0 40px #38bdf8;
+      border-radius: 3px;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .s1-takeaway-banner {
+      display: none;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--color-sensor);
+      color: #6ee7b7;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       5. SLIDE 2: HAYOTIY DEKOMPOZITSIYA 1 (MAZALI PITSA PISHIRISH)
+       ========================================================================== */
+    .s2-pizza-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 20px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .pizza-steps-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pizza-step-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--transition-smooth);
+    }
+
+    .pizza-step-card.active-step {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.12);
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+    }
+
+    .pizza-step-card.done-step {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.12);
+    }
+
+    .step-num-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.8rem;
+    }
+
+    .step-action-btn {
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 700;
+      transition: var(--transition-smooth);
+    }
+
+    .step-action-btn:hover {
+      background: #f59e0b;
+      border-color: #f59e0b;
+      color: #000;
+    }
+
+    .pizza-visual-stage {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 16px;
+    }
+
+    .pizza-pan {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: #334155;
+      border: 8px solid #475569;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s ease;
+    }
+
+    .pizza-crust {
+      width: 175px;
+      height: 175px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      position: absolute;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .pizza-sauce {
+      width: 155px;
+      height: 155px;
+      border-radius: 50%;
+      background: #ef4444;
+      position: absolute;
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .pizza-toppings {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-around;
+      font-size: 1.4rem;
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .pizza-baked-glow {
+      box-shadow: 0 0 40px rgba(245, 158, 11, 0.8), 0 0 80px rgba(239, 68, 68, 0.4);
+      background: #78350f !important;
+    }
+
+    /* ==========================================================================
+       6. SLIDE 3: HAYOTIY DEKOMPOZITSIYA 2 (XONANI YIG'ISHTIRISH)
+       ========================================================================== */
+    .s3-room-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .room-zone-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-md);
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .room-zone-card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-4px);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .room-zone-card.cleaned {
+      border-style: solid;
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.12);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .zone-icon {
+      font-size: 3rem;
+      margin-bottom: 8px;
+      transition: transform 0.4s ease;
+    }
+
+    .zone-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .zone-state-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #ef4444;
+      margin-top: 8px;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      background: rgba(239, 68, 68, 0.15);
+    }
+
+    .room-zone-card.cleaned .zone-state-badge {
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.15);
+    }
+
+    .room-progress-meter {
+      width: 100%;
+      max-width: 450px;
+      background: #1e293b;
+      height: 20px;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 10px;
+    }
+
+    .room-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #3b82f6, #10b981);
+      transition: width 0.4s ease;
+    }
+
+    /* ==========================================================================
+       7. SLIDE 4: HAYOTIY DEKOMPOZITSIYA 3 (CHAMADON YIG'ISH)
+       ========================================================================== */
+    .s4-luggage-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .luggage-items-pool {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: var(--radius-md);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+    }
+
+    .luggage-item-chip {
+      background: rgba(30, 41, 59, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: grab;
+      transition: var(--transition-smooth);
+    }
+
+    .luggage-item-chip.selected {
+      border-color: #fbbf24;
+      background: rgba(251, 191, 36, 0.25);
+      transform: scale(1.05);
+    }
+
+    .luggage-pockets-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .luggage-pocket {
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: var(--radius-md);
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      padding: 14px;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: var(--transition-smooth);
+    }
+
+    .luggage-pocket.pocket-clothes { border-color: rgba(56, 189, 248, 0.4); }
+    .luggage-pocket.pocket-docs { border-color: rgba(245, 158, 11, 0.4); }
+    .luggage-pocket.pocket-gadgets { border-color: rgba(168, 85, 247, 0.4); }
+
+    /* ==========================================================================
+       8. SLIDE 5: ROBOT TOIFALASH (SARALASH O'YINI)
+       ========================================================================== */
+    .task-cards-pool {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      min-height: 70px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: var(--radius-md);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      margin-bottom: 14px;
+    }
+
+    .task-chip {
+      background: rgba(30, 41, 59, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: grab;
+      transition: var(--transition-smooth);
+    }
+
+    .task-chip.selected {
+      border-color: #fbbf24;
+      background: rgba(251, 191, 36, 0.2);
+      transform: scale(1.05);
+    }
+
+    .target-bins-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      width: 100%;
+    }
+
+    .bin-container {
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: var(--radius-md);
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      padding: 14px;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: var(--transition-smooth);
+    }
+
+    .bin-container.bin-energy { border-color: rgba(245, 158, 11, 0.4); }
+    .bin-container.bin-motion { border-color: rgba(6, 182, 212, 0.4); }
+    .bin-container.bin-sensor { border-color: rgba(16, 185, 129, 0.4); }
+
+    /* ==========================================================================
+       9. SLIDE 6: HAR BIR QISMGA MUSTAQIL YECHIM (PIPELINE)
+       ========================================================================== */
+    .s6-pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .subtask-station {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: var(--transition-smooth);
+    }
+
+    .subtask-station.completed {
+      border-color: var(--color-sensor);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+    }
+
+    /* ==========================================================================
+       10. SLIDE 7: DASTURLASHDA MONOLIT VS MODULLAR
+       ========================================================================== */
+    .s7-comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .code-comparison-card {
+      background: rgba(15, 23, 42, 0.85);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .code-comparison-card.bad { border-color: rgba(239, 68, 68, 0.4); }
+    .code-comparison-card.good { border-color: rgba(16, 185, 129, 0.4); }
+
+    .comparison-header {
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-weight: 700;
+    }
+
+    .comparison-header.bad { background: rgba(239, 68, 68, 0.15); color: #fca5a5; }
+    .comparison-header.good { background: rgba(16, 185, 129, 0.15); color: #86efac; }
+
+    .code-body {
+      padding: 12px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: #e2e8f0;
+      flex: 1;
+      overflow-y: auto;
+      max-height: 230px;
+      background: #090d16;
+    }
+
+    /* ==========================================================================
+       11. SLIDE 8: KOD AMALIYOTI 1 (REFAKTORING)
+       ========================================================================== */
+    .s8-refactor-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 18px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .unorganized-code-box {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .draggable-code-line {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-family: monospace;
+      font-size: 0.78rem;
+      cursor: grab;
+      color: #93c5fd;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--transition-smooth);
+    }
+
+    .draggable-code-line.selected {
+      border-color: #fbbf24;
+      background: rgba(251, 191, 36, 0.15);
+    }
+
+    .target-function-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .target-function-box {
+      background: rgba(15, 23, 42, 0.85);
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+
+    .target-function-box.filled {
+      border-style: solid;
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .fn-header {
+      font-family: monospace;
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: #38bdf8;
+    }
+
+    /* ==========================================================================
+       12. SLIDE 9: KOD AMALIYOTI 2 (DEBUGGING VIA DECOMPOSITION)
+       ========================================================================== */
+    .s9-debug-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .debug-robot-diagnostic {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .diagnostic-modules-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .diag-module-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .diag-module-row.has-bug {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.15);
+    }
+
+    .diag-module-row.fixed {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.15);
+    }
+
+    .fix-code-action-btn {
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      border-radius: var(--radius-full);
+      background: #f59e0b;
+      border: none;
+      color: #000;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       13. SLIDE 10: KOD PLAYGROUND VA VISUAL RUNNER
+       ========================================================================== */
+    .s10-playground-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .code-editor-pane {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .editor-top-bar {
+      background: #111827;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .editor-code-body {
+      flex: 1;
+      padding: 12px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      background: #090d16;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .editor-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+
+    .editor-line.active-executing {
+      background: rgba(56, 189, 248, 0.25);
+      border-left: 3px solid #38bdf8;
+    }
+
+    .simulation-stage-pane {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sim-canvas {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+      position: relative;
+      background: 
+        radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.4) 0%, rgba(9, 13, 22, 0.95) 100%),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 28px 28px, 28px 28px;
+    }
+
+    .sim-target-station {
+      position: absolute;
+      width: 65px;
+      height: 65px;
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      transition: all 0.4s ease;
+    }
+
+    .sim-target-station.station-trash { top: 35px; left: 35px; background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.4); }
+    .sim-target-station.station-switch { top: 35px; right: 35px; background: rgba(6, 182, 212, 0.1); border-color: rgba(6, 182, 212, 0.4); }
+    .sim-target-station.station-door { bottom: 35px; right: 35px; background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.4); }
+
+    .sim-robot-avatar {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      bottom: 35px;
+      left: 35px;
+      transition: all 0.75s cubic-bezier(0.34, 1.2, 0.64, 1);
+      z-index: 10;
+    }
+
+    /* Modals & Celebrations */
+    .grand-victory-modal {
+      display: none;
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(11, 15, 25, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 100;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      animation: popInBounce 0.5s ease;
+    }
+
+    /* ==========================================================================
+       14. BOTTOM NAVIGATION DECK
+       ========================================================================== */
+    .app-footer {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--bg-card-border);
+    }
+
+    .slide-counter-badge {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      padding: 5px 14px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    #fx-canvas {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    @media (max-width: 860px) {
+      .s2-pizza-layout,
+      .s7-comparison-grid,
+      .s8-refactor-layout,
+      .s9-debug-layout,
+      .s10-playground-container {
+        grid-template-columns: 1fr;
+      }
+      .s3-room-grid,
+      .luggage-pockets-row,
+      .target-bins-row,
+      .s6-pipeline-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="fx-canvas"></canvas>
+
+  <!-- TOP HEADER -->
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+          <circle cx="12" cy="5" r="2"></circle>
+          <path d="M12 7v4"></path>
+          <line x1="8" y1="16" x2="8" y2="16"></line>
+          <line x1="16" y1="16" x2="16" y2="16"></line>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">Bo'laklarga Ajratish Sehri</div>
+        <div class="brand-subtitle">Katta Ishlarni Kichik Qismlarga Bo'lish | 8-13 Yosh</div>
+      </div>
+    </div>
+
+    <!-- 10-Step Track -->
+    <div class="progress-track" id="progressTrack">
+      <button class="step-dot active" data-slide="0" title="1: Katta Ishni Bo'laklash">1</button>
+      <button class="step-dot" data-slide="1" title="2: Pitsa Tayyorlash">2</button>
+      <button class="step-dot" data-slide="2" title="3: Xonani Yig'ish">3</button>
+      <button class="step-dot" data-slide="3" title="4: Chamadon Saralash">4</button>
+      <button class="step-dot" data-slide="4" title="5: Vazifalarni Ajratish">5</button>
+      <button class="step-dot" data-slide="5" title="6: Qismlarni Sozlash">6</button>
+      <button class="step-dot" data-slide="6" title="7: Kod Mantiqi">7</button>
+      <button class="step-dot" data-slide="7" title="8: Kodni Tartiblash">8</button>
+      <button class="step-dot" data-slide="8" title="9: Xatoni Tuzatish">9</button>
+      <button class="step-dot" data-slide="9" title="10: Kod Bilan Ishlash">10</button>
+    </div>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="soundToggleBtn" title="Ovoz" aria-label="Ovoz">
+        <svg id="soundIconOn" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <svg id="soundIconOff" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+        </svg>
+      </button>
+
+      <button class="icon-btn" id="restartSlideBtn" title="Qayta boshlash">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+          <path d="M3 3v5h5"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- VIEWPORT -->
+  <main class="presentation-container">
+    <div class="slide-viewport">
+
+      <!-- ====================================================================
+           SLIDE 1: KATTA MUAMMO (BO'LAKLASH)
+           ==================================================================== -->
+      <section class="slide active" id="slide-0" data-index="0">
+        <div class="slide-header">
+          <span class="slide-badge" style="background:rgba(239, 68, 68, 0.2); color:#fca5a5;">1-Dars: Katta Ishni Bo'lish</span>
+          <h1 class="slide-title">Katta Muammo: Bir O'tirishda Yechib Bo'lmaydi!</h1>
+          <p class="slide-desc">
+            "Katta Robot Yasash" juda og'ir va chalkash ko'rinadi. 
+            Lekin sehrli <strong>Bo'laklash Lazeri</strong> yordamida uni 3 ta oson qismga ajratib olamiz!
+          </p>
+        </div>
+
+        <div class="interactive-board">
+          <div class="s1-container">
+            <div class="s1-stage" id="s1Stage">
+              <div class="giant-monolith heavy-shake" id="giantMonolith" title="Cherting yoki lazer bilan bo'laklang!">
+                <div class="monolith-warning-badge">⚠️ BIR BUTUN OG'IR VAZIFA</div>
+                <div class="monolith-smoke" style="top:10px; left:20px;">💨</div>
+                <div class="monolith-smoke" style="top:20px; right:30px; animation-delay:1s;">💨</div>
+                <svg width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5">
+                  <rect x="3" y="4" width="18" height="16" rx="3"></rect>
+                  <circle cx="8.5" cy="10" r="1.5" fill="#ef4444"></circle>
+                  <circle cx="15.5" cy="10" r="1.5" fill="#ef4444"></circle>
+                  <path d="M8 15h8" stroke-linecap="round"></path>
+                </svg>
+                <div style="font-size:0.85rem; font-weight:800; color:#cbd5e1; margin-top:6px;">
+                  Ulkan va Chalkash Ish
+                </div>
+              </div>
+
+              <div class="laser-slash-line" id="laserSlash"></div>
+
+              <div class="split-modules-container" id="splitModules">
+                <div class="split-module-card energy">
+                  <div style="font-size:2rem; margin-bottom:8px;">⚡</div>
+                  <div style="font-size:1.05rem; font-weight:800; margin-bottom:4px;">1. Energiya</div>
+                  <div style="font-size:0.78rem; color:#94a3b8;">Batareya va quvvat ta'minoti</div>
+                </div>
+
+                <div class="split-module-card motion">
+                  <div style="font-size:2rem; margin-bottom:8px;">⚙️</div>
+                  <div style="font-size:1.05rem; font-weight:800; margin-bottom:4px;">2. Harakat</div>
+                  <div style="font-size:0.78rem; color:#94a3b8;">G'ildiraklar va motor tezligi</div>
+                </div>
+
+                <div class="split-module-card sensor">
+                  <div style="font-size:2rem; margin-bottom:8px;">🧠</div>
+                  <div style="font-size:1.05rem; font-weight:800; margin-bottom:4px;">3. Sensorlar</div>
+                  <div style="font-size:0.78rem; color:#94a3b8;">Kamera ko'zi va masofa radari</div>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" id="s1SliceBtn" style="background:linear-gradient(135deg, #f43f5e, #e11d48);">
+              ⚡ Lazer Bilan 3 Qismga Bo'lish!
+            </button>
+
+            <div class="s1-takeaway-banner" id="s1Takeaway">
+              ✨ <strong>Oltin Qoida:</strong> Katta vazifani birdaniga emas, 3 ta oson va kichik bo'lakka bo'lib bajaramiz!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: HAYOTIY MISOL 1 (PITSA TAYYORLASH)
+           ==================================================================== -->
+      <section class="slide" id="slide-1" data-index="1">
+        <div class="slide-header">
+          <span class="slide-badge" style="background:rgba(245, 158, 11, 0.2); color:#fde68a;">2-Dars: Hayotiy Misol</span>
+          <h2 class="slide-title">Oshpazlik San'ati: Mazali Pitsa Pishirish!</h2>
+          <p class="slide-desc">
+            "Pitsa pishirish" katta muammo. Oshpaz uni birdaniga pishirmaydi, balki 3 ta ketma-ket bosqichga ajratadi:
+          </p>
+        </div>
+
+        <div class="interactive-board">
+          <div class="s2-pizza-layout">
+            <div class="pizza-steps-panel">
+              <div class="pizza-step-card active-step" id="pizzaCard1">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span class="step-num-badge">1</span>
+                  <div>
+                    <div style="font-weight:700; font-size:0.92rem;">🥣 Xamir Tayyorlash</div>
+                    <div style="font-size:0.75rem; color:#94a3b8;">Un va suvni aralashtirish</div>
+                  </div>
+                </div>
+                <button class="step-action-btn" id="btnPizzaStep1">Qorish 🌾</button>
+              </div>
+
+              <div class="pizza-step-card" id="pizzaCard2">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span class="step-num-badge">2</span>
+                  <div>
+                    <div style="font-weight:700; font-size:0.92rem;">🍅 Masalliqlar Terish</div>
+                    <div style="font-size:0.75rem; color:#94a3b8;">Sous va pishloq qo'shish</div>
+                  </div>
+                </div>
+                <button class="step-action-btn" id="btnPizzaStep2" disabled>Terish 🧀</button>
+              </div>
+
+              <div class="pizza-step-card" id="pizzaCard3">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span class="step-num-badge">3</span>
+                  <div>
+                    <div style="font-weight:700; font-size:0.92rem;">🔥 Pechda Pishirish</div>
+                    <div style="font-size:0.75rem; color:#94a3b8;">220°C haroratda 10 daqiqa</div>
+                  </div>
+                </div>
+                <button class="step-action-btn" id="btnPizzaStep3" disabled>Pishirish 🔥</button>
+              </div>
+
+              <div id="pizzaStatusBanner" style="font-size:0.85rem; color:#38bdf8; font-weight:600; padding:6px 0;">
+                👉 1-bosqich: Avval xamirni qoring!
+              </div>
+            </div>
+
+            <div class="pizza-visual-stage">
+              <div class="pizza-pan" id="pizzaPan">
+                <div class="pizza-crust" id="pizzaCrust"></div>
+                <div class="pizza-sauce" id="pizzaSauce"></div>
+                <div class="pizza-toppings" id="pizzaToppings">
+                  <span>🍄</span><span>🧀</span><span>🍅</span><span>🫒</span>
+                </div>
+              </div>
+              <div id="pizzaResultLabel" style="margin-top:14px; font-weight:700; font-size:0.95rem; color:#cbd5e1;">
+                Bo'sh tova kutilmoqda...
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: HAYOTIY MISOL 2 (XONANI YIG'ISHTIRISH)
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-index="2">
+        <div class="slide-header">
+          <span class="slide-badge" style="background:rgba(6, 182, 212, 0.2); color:#a5f3fc;">3-Dars: Hayotiy Misol</span>
+          <h2 class="slide-title">Tartibsiz Xonani Yig'ishtirish</h2>
+          <p class="slide-desc">
+            Xona ostin-ustun bo'lsa, qayerdan boshlashni bilmaysiz. Xonani 3 ta alohida zonaga bo'ling va tozalang:
+          </p>
+        </div>
+
+        <div class="interactive-board">
+          <div class="s3-room-grid">
+            <div class="room-zone-card" id="zoneDesk">
+              <div class="zone-icon">📚</div>
+              <div class="zone-title">1. Ish Stoli</div>
+              <div style="font-size:0.78rem; color:#94a3b8;">Daftar va kitoblarni javonga taxlash</div>
+              <div class="zone-state-badge" id="badgeDesk">❌ Tartibsiz</div>
+            </div>
+
+            <div class="room-zone-card" id="zoneFloor">
+              <div class="zone-icon">🧸</div>
+              <div class="zone-title">2. Xona Poli</div>
+              <div style="font-size:0.78rem; color:#94a3b8;">O'yinchoq va legolarni qutiga solish</div>
+              <div class="zone-state-badge" id="badgeFloor">❌ Tarqoq</div>
+            </div>
+
+            <div class="room-zone-card" id="zoneBed">
+              <div class="zone-icon">👕</div>
+              <div class="zone-title">3. Kiyimlar</div>
+              <div style="font-size:0.78rem; color:#94a3b8;">Kiyimlarni taxlab shkafga ilish</div>
+              <div class="zone-state-badge" id="badgeBed">❌ Yoyilgan</div>
+            </div>
+          </div>
+
+          <div style="font-size:0.85rem; font-weight:700; color:#cbd5e1;">
+            Tozalik darajasi: <span id="roomCleanPercent">0%</span>
+          </div>
+          <div class="room-progress-meter">
+            <div class="room-progress-fill" id="roomProgressFill"></div>
+          </div>
+
+          <div id="roomSuccessBanner" style="display:none; margin-top:12px; color:#10b981; font-weight:700; font-size:0.95rem;">
+            ✨ Barakalla! Katta tartibsizlik 3 ta zonada osongina yengildi!
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: HAYOTIY MISOL 3 (CHAMADON YIG'ISH)
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-index="3">
+        <div class="slide-header">
+          <span class="slide-badge" style="background:rgba(168, 85, 247, 0.2); color:#d8b4fe;">4-Dars: Hayotiy Misol</span>
+          <h2 class="slide-title">Sayohatga Chamadon Yig'ish</h2>
+          <p class="slide-desc">
+            Barcha buyumlarni aralashtirib tashlasak, chamadondan hech narsa topib bo'lmaydi! 
+            Buyumlarni toifasi bo'yicha mos cho'ntaklarga joylang (Bosing yoki sudrang):
+          </p>
+        </div>
+
+        <div class="interactive-board">
+          <div class="s4-luggage-layout">
+            <div class="luggage-items-pool" id="luggageItemsPool">
+              <div class="luggage-item-chip" data-category="clothes" id="itemTshirt"><span>👕</span> Futbolka</div>
+              <div class="luggage-item-chip" data-category="docs" id="itemPassport"><span>🛂</span> Pasport</div>
+              <div class="luggage-item-chip" data-category="gadgets" id="itemPhone"><span>📱</span> Telefon</div>
+              <div class="luggage-item-chip" data-category="clothes" id="itemShoes"><span>👟</span> Krossovka</div>
+              <div class="luggage-item-chip" data-category="docs" id="itemTicket"><span>🎫</span> Chipta</div>
+              <div class="luggage-item-chip" data-category="gadgets" id="itemCharger"><span>🔌</span> Zaryadlovchi</div>
+            </div>
+
+            <div class="luggage-pockets-row">
+              <div class="luggage-pocket pocket-clothes" data-accept="clothes" id="pocketClothes">
+                <div style="font-weight:800; font-size:0.95rem; color:#38bdf8; margin-bottom:8px;">
+                  👔 Kiyimlar Bo'limi (<span id="countClothes">0/2</span>)
+                </div>
+                <div class="pocket-list" id="listClothes" style="display:flex; flex-direction:column; gap:6px; width:100%;"></div>
+              </div>
+
+              <div class="luggage-pocket pocket-docs" data-accept="docs" id="pocketDocs">
+                <div style="font-weight:800; font-size:0.95rem; color:#f59e0b; margin-bottom:8px;">
+                  📑 Hujjatlar Cho'ntagi (<span id="countDocs">0/2</span>)
+                </div>
+                <div class="pocket-list" id="listDocs" style="display:flex; flex-direction:column; gap:6px; width:100%;"></div>
+              </div>
+
+              <div class="luggage-pocket pocket-gadgets" data-accept="gadgets" id="pocketGadgets">
+                <div style="font-weight:800; font-size:0.95rem; color:#a855f7; margin-bottom:8px;">
+                  🔌 Gadjetlar Bo'limi (<span id="countGadgets">0/2</span>)
+                </div>
+                <div class="pocket-list" id="listGadgets" style="display:flex; flex-direction:column; gap:6px; width:100%;"></div>
+              </div>
+            </div>
+
+            <div id="luggageWinMsg" style="display:none; text-align:center; color:#10b981; font-weight:800; font-size:1rem;">
+              🎉 Chamadon 100% tartibli yig'ildi! Kichik guruhlarga bo'lish sayohatni ham osonlashtirdi!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: ROBOT VAZIFALARINI SARALASH
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-index="4">
+        <div class="slide-header">
+          <span class="slide-badge" style="background:rgba(56, 189, 248, 0.2); color:#7dd3fc;">5-Dars: Guruhlarga Ajratish</span>
+          <h2 class="slide-title">Robot Vazifalarini Bo'limlarga Ajratish</h2>
+          <p class="slide-desc">
+            Aralashib ketgan 6 ta vazifani o'zining mos bo'limiga joylashtiring:
+          </p>
+        </div>
+
+        <div class="interactive-board">
+          <div style="width:100%;">
+            <div class="task-cards-pool" id="taskCardsPool">
+              <div class="task-chip" data-type="energy" id="task1"><span>⚡</span> Batareyani zaryadlash</div>
+              <div class="task-chip" data-type="motion" id="task2"><span>⚙️</span> G'ildirak motorini sozlash</div>
+              <div class="task-chip" data-type="sensor" id="task3"><span>🧠</span> Kamera ko'zini yoqish</div>
+              <div class="task-chip" data-type="energy" id="task4"><span>⚡</span> Quyosh panelini ulash</div>
+              <div class="task-chip" data-type="motion" id="task5"><span>⚙️</span> Burilish rulini tekshirish</div>
+              <div class="task-chip" data-type="sensor" id="task6"><span>🧠</span> Masofa radarini sinash</div>
+            </div>
+
+            <div class="target-bins-row">
+              <div class="bin-container bin-energy" data-accept="energy" id="binEnergy">
+                <div style="color:var(--color-energy); font-weight:800; font-size:0.95rem; margin-bottom:10px;">
+                  ⚡ Energiya Bo'limi (<span id="counterEnergy">0/2</span>)
+                </div>
+                <div class="bin-items-list" id="listEnergy" style="display:flex; flex-direction:column; gap:6px; width:100%;"></div>
+              </div>
+
+              <div class="bin-container bin-motion" data-accept="motion" id="binMotion">
+                <div style="color:var(--color-motion); font-weight:800; font-size:0.95rem; margin-bottom:10px;">
+                  ⚙️ Harakat Bo'limi (<span id="counterMotion">0/2</span>)
+                </div>
+                <div class="bin-items-list" id="listMotion" style="display:flex; flex-direction:column; gap:6px; width:100%;"></div>
+              </div>
+
+              <div class="bin-container bin-sensor" data-accept="sensor" id="binSensor">
+                <div style="color:var(--color-sensor); font-weight:800; font-size:0.95rem; margin-bottom:10px;">
+                  🧠 Sensor Bo'limi (<span id="counterSensor">0/2</span>)
+                </div>
+                <div class="bin-items-list" id="listSensor" style="display:flex; flex-direction:column; gap:6px; width:100%;"></div>
+              </div>
+            </div>
+
+            <div id="s5WinBanner" style="display:none; text-align:center; color:#10b981; font-weight:800; font-size:1rem; margin-top:12px;">
+              🎉 Ajoyib! Har bir vazifa o'z bo'limiga to'g'ri biriktirildi!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: HAR BIR QISMGA MUSTAQIL YECHIM (SOZLASH)
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-index="5">
+        <div class="slide-header">
+          <span class="slide-badge" style="background:rgba(245, 158, 11, 0.2); color:#fde68a;">6-Dars: Mustaqil Yechim</span>
+          <h2 class="slide-title">Har Bir Qismni Alohida Sozlash</h2>
+          <p class="slide-desc">
+            Har bir kichik qismni alohida-alohida sozlab, to'g'ri ishlatamiz:
+          </p>
+        </div>
+
+        <div class="interactive-board">
+          <div class="s6-pipeline-grid">
+            <div class="subtask-station" id="stationA">
+              <span style="font-size:0.75rem; color:#f59e0b; font-weight:800;">1-Qism</span>
+              <div style="font-weight:700; font-size:0.95rem; margin:4px 0;">⚡ Energiya Zaryadi</div>
+              <div style="width:100px; height:24px; background:#1e293b; border:2px solid #f59e0b; border-radius:4px; margin:8px 0; overflow:hidden;">
+                <div id="batteryFill" style="width:20%; height:100%; background:#f59e0b; transition:width 0.2s;"></div>
+              </div>
+              <input type="range" id="batterySlider" min="20" max="100" value="20" style="width:80%; accent-color:#f59e0b;">
+              <div id="statusA" style="font-size:0.75rem; color:#94a3b8; margin-top:8px;">⏳ Quvvat: 20%</div>
+            </div>
+
+            <div class="subtask-station" id="stationB">
+              <span style="font-size:0.75rem; color:#06b6d4; font-weight:800;">2-Qism</span>
+              <div style="font-weight:700; font-size:0.95rem; margin:4px 0;">⚙️ Motor Tezligi</div>
+              <div id="gearVisual" style="font-size:2.2rem; margin:4px 0;">⚙️</div>
+              <input type="range" id="rpmSlider" min="0" max="100" value="10" style="width:80%; accent-color:#06b6d4;">
+              <div id="statusB" style="font-size:0.75rem; color:#94a3b8; margin-top:8px;">⏳ Tezlik: 10 RPM</div>
+            </div>
+
+            <div class="subtask-station" id="stationC">
+              <span style="font-size:0.75rem; color:#10b981; font-weight:800;">3-Qism</span>
+              <div style="font-weight:700; font-size:0.95rem; margin:4px 0;">🧠 Sensor To'lqini</div>
+              <div id="sensorLens" style="font-size:2rem; margin:4px 0;">👁️</div>
+              <div style="display:flex; gap:6px;">
+                <button class="freq-btn" data-freq="red" style="padding:4px 8px; font-size:0.72rem; border-radius:4px; border:1px solid #475569; background:#1e293b; color:#fff; cursor:pointer;">🔴 Qizil</button>
+                <button class="freq-btn" data-freq="green" style="padding:4px 8px; font-size:0.72rem; border-radius:4px; border:1px solid #475569; background:#1e293b; color:#fff; cursor:pointer;">🟢 Yashil</button>
+              </div>
+              <div id="statusC" style="font-size:0.75rem; color:#94a3b8; margin-top:8px;">⏳ To'lqin kutilmoqda</div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="assembleRobotBtn" style="display:none; background:linear-gradient(135deg, #8b5cf6, #ec4899); font-size:1.05rem; padding:12px 30px;">
+            🤖 Tizimlarni Birlashtirish (Robotni Yig'ish!)
+          </button>
+
+          <div id="assembledModal" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(11,15,25,0.95); z-index:50; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px;">
+            <div style="font-size:4.5rem; animation:floatSmoke 2s infinite alternate;">🤖</div>
+            <h2 style="color:#38bdf8; font-size:1.6rem; margin:10px 0;">Robo-Do'st To'liq Uyg'ondi!</h2>
+            <p style="color:#cbd5e1; font-size:0.9rem; max-width:450px; margin-bottom:16px;">
+              Har bir qism alohida tuzatilgach, butun robot darhol ishga tushdi!
+            </p>
+            <button class="btn btn-primary" id="closeAssembleModalBtn">Keyingi Slayd: Dasturlashga O'tish 👉</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: DASTURLASHDA CHALKASH KOD VS TARTIBLI FUNKSIYALAR
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-index="6">
+        <div class="slide-header">
+          <span class="slide-badge" style="background:rgba(168, 85, 247, 0.2); color:#d8b4fe;">7-Dars: Dasturlash Mantiqi</span>
+          <h2 class="slide-title">Chalkash Kod vs Tartibli Qismlar</h2>
+          <p class="slide-desc">
+            Dasturchilar katta dasturlarni qanday yozishadi? Aralash-quralash kod va toza funksiyalar taqqosi:
+          </p>
+        </div>
+
+        <div class="interactive-board">
+          <div class="s7-comparison-grid">
+            <div class="code-comparison-card bad">
+              <div class="comparison-header bad">
+                <span>❌ Chalkash Kod (Hamma narsa aralash)</span>
+                <span style="font-size:0.75rem;">100+ qator chalkashlik</span>
+              </div>
+              <div class="code-body" id="monolithCodeBox">
+                <div style="color:#94a3b8;"># Hamma buyruq bitta joyga tiqilgan:</div>
+                <div>batareya = 100; motor = on;</div>
+                <div>agar sensor == xato: motor = toxta;</div>
+                <div>lekin batareya ham ochadi;</div>
+                <div>chiroq_yoq(); eshik_och();</div>
+                <div style="color:#ef4444;"># Bitta joy buzilsa, qayerdaligini topib bo'lmaydi!</div>
+              </div>
+              <div style="padding:10px; background:rgba(0,0,0,0.3); text-align:center;">
+                <button class="btn btn-secondary" id="testMonolithBtn" style="padding:6px 14px; font-size:0.78rem;">
+                  🔍 Xatoni Qidirish (Sinab ko'r)
+                </button>
+              </div>
+            </div>
+
+            <div class="code-comparison-card good">
+              <div class="comparison-header good">
+                <span>✅ Qismlarga Bo'lish Kuchi</span>
+                <span style="font-size:0.75rem;">3 ta alohida funksiya</span>
+              </div>
+              <div class="code-body">
+                <div style="margin-bottom:6px;"><span style="color:#f472b6;">def</span> <span style="color:#38bdf8;">quvvatniYoq</span>(): return 100</div>
+                <div style="margin-bottom:6px;"><span style="color:#f472b6;">def</span> <span style="color:#38bdf8;">yurishniBoshla</span>(): motor.tezlik = 70</div>
+                <div><span style="color:#f472b6;">def</span> <span style="color:#38bdf8;">xaritaniChiz</span>(): kamera.yoq()</div>
+              </div>
+              <div style="padding:10px; background:rgba(0,0,0,0.3); display:flex; gap:8px; justify-content:center;">
+                <button class="btn btn-secondary" id="testFuncEnergyBtn" style="padding:6px 10px; font-size:0.75rem;">⚡ Quvvat</button>
+                <button class="btn btn-secondary" id="testFuncMotionBtn" style="padding:6px 10px; font-size:0.75rem;">⚙️ Motor</button>
+                <button class="btn btn-secondary" id="testFuncSensorBtn" style="padding:6px 10px; font-size:0.75rem;">🧠 Sensor</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="s7Feedback" style="padding:8px 16px; margin-top:12px; background:rgba(15,23,42,0.8); border:1px solid rgba(255,255,255,0.1); border-radius:6px; font-size:0.85rem;">
+            💡 <strong>Tushuntirish:</strong> Tugmalarni bosib, funksiyalarni alohida-alohida tekshiring!
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: KOD AMALIYOTI 1 (KODNI TARTIBLASH)
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-index="7">
+        <div class="slide-header">
+          <span class="slide-badge" style="background:rgba(16, 185, 129, 0.2); color:#6ee7b7;">8-Dars: Kod Amaliyoti</span>
+          <h2 class="slide-title">Chalkash Kodni Tartibli Funksiyalarga Bo'lish</h2>
+          <p class="slide-desc">
+            Quyidagi aralash kod satrlarini o'zining mos qutisiga joylang (Kodni tartiblash):
+          </p>
+        </div>
+
+        <div class="interactive-board">
+          <div class="s8-refactor-layout">
+            <div class="unorganized-code-box">
+              <div style="font-size:0.78rem; color:#94a3b8; font-weight:700; margin-bottom:4px;">
+                Aralash Kod Satrlari (Tanlang):
+              </div>
+              <div class="draggable-code-line" data-cat="energy" id="codeLine1">quvvat_ulash() ⚡</div>
+              <div class="draggable-code-line" data-cat="motion" id="codeLine2">motorni_yoqish() ⚙️</div>
+              <div class="draggable-code-line" data-cat="sensor" id="codeLine3">kamerani_ochish() 🧠</div>
+              <div class="draggable-code-line" data-cat="energy" id="codeLine4">batareya.zaryadla() ⚡</div>
+              <div class="draggable-code-line" data-cat="motion" id="codeLine5">tezlikni_sozla(70) ⚙️</div>
+              <div class="draggable-code-line" data-cat="sensor" id="codeLine6">radarni_boshla() 🧠</div>
+            </div>
+
+            <div class="target-function-container">
+              <div class="target-function-box" data-fn="energy" id="boxFnEnergy">
+                <div class="fn-header">def energiya_tizimi(): <span id="refactorCountEnergy" style="font-size:0.75rem; color:#94a3b8;">(0/2)</span></div>
+                <div class="fn-content" id="fnContentEnergy" style="display:flex; flex-direction:column; gap:4px;"></div>
+              </div>
+
+              <div class="target-function-box" data-fn="motion" id="boxFnMotion">
+                <div class="fn-header">def harakat_tizimi(): <span id="refactorCountMotion" style="font-size:0.75rem; color:#94a3b8;">(0/2)</span></div>
+                <div class="fn-content" id="fnContentMotion" style="display:flex; flex-direction:column; gap:4px;"></div>
+              </div>
+
+              <div class="target-function-box" data-fn="sensor" id="boxFnSensor">
+                <div class="fn-header">def sensor_tizimi(): <span id="refactorCountSensor" style="font-size:0.75rem; color:#94a3b8;">(0/2)</span></div>
+                <div class="fn-content" id="fnContentSensor" style="display:flex; flex-direction:column; gap:4px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="s8WinBanner" style="display:none; margin-top:12px; color:#10b981; font-weight:800; font-size:0.95rem;">
+            🎉 Ajoyib! Aralash kod 3 ta toza va tushunarli funksiyaga ajratildi!
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: KOD AMALIYOTI 2 (XATONI TOPISH VA TUZATISH)
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-index="8">
+        <div class="slide-header">
+          <span class="slide-badge" style="background:rgba(239, 68, 68, 0.2); color:#fca5a5;">9-Dars: Xatoni Izlash</span>
+          <h2 class="slide-title">Qismlar Bo'yicha Xatoni Qidirish va Tuzatish</h2>
+          <p class="slide-desc">
+            Robot yurmay qoldi! 1000 qator kod ichida adashmaslik uchun, har bir qismni alohida tekshiramiz va nosoz joyni tuzatamiz:
+          </p>
+        </div>
+
+        <div class="interactive-board">
+          <div class="s9-debug-layout">
+            <div class="debug-robot-diagnostic">
+              <div style="font-size:3.5rem; margin-bottom:8px;" id="debugRobotIcon">🤖</div>
+              <div style="font-weight:700; font-size:1rem; margin-bottom:6px;">Robo-Do'st Holati:</div>
+              <div id="debugStatusLabel" style="color:#ef4444; font-weight:800; font-size:0.9rem;">
+                ⚠️ Xatolik bor: Harakat to'xtagan!
+              </div>
+            </div>
+
+            <div class="diagnostic-modules-list">
+              <div class="diag-module-row" id="diagRowEnergy">
+                <div>
+                  <div style="font-weight:700; font-size:0.9rem;">⚡ quvvat_qismi()</div>
+                  <div style="font-size:0.75rem; color:#94a3b8;" id="diagEnergyDesc">Sinov kutilmoqda</div>
+                </div>
+                <button class="btn btn-secondary" id="btnTestDiagEnergy" style="padding:4px 10px; font-size:0.75rem;">Tekshirish</button>
+              </div>
+
+              <div class="diag-module-row" id="diagRowSensor">
+                <div>
+                  <div style="font-weight:700; font-size:0.9rem;">🧠 sensor_qismi()</div>
+                  <div style="font-size:0.75rem; color:#94a3b8;" id="diagSensorDesc">Sinov kutilmoqda</div>
+                </div>
+                <button class="btn btn-secondary" id="btnTestDiagSensor" style="padding:4px 10px; font-size:0.75rem;">Tekshirish</button>
+              </div>
+
+              <div class="diag-module-row" id="diagRowMotion">
+                <div>
+                  <div style="font-weight:700; font-size:0.9rem;">⚙️ harakat_qismi()</div>
+                  <div style="font-size:0.75rem; color:#94a3b8;" id="diagMotionDesc">Sinov kutilmoqda</div>
+                </div>
+                <button class="btn btn-secondary" id="btnTestDiagMotion" style="padding:4px 10px; font-size:0.75rem;">Tekshirish</button>
+              </div>
+
+              <div id="bugFixPanel" style="display:none; background:#090d16; border:1px solid #ef4444; border-radius:6px; padding:10px; margin-top:8px;">
+                <div style="font-size:0.75rem; color:#fca5a5; font-family:monospace; margin-bottom:6px;">
+                  - motor_tezligi = 0  # ❌ XATO!
+                </div>
+                <button class="fix-code-action-btn" id="btnApplyBugFix">
+                  🛠️ Kodni Tuzatish (motor_tezligi = 80)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="s9Feedback" style="margin-top:12px; font-size:0.85rem; color:#38bdf8;">
+            💡 Avval har bir qismni "Tekshirish" tugmasi orqali sinab ko'ring!
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: KOD PLAYGROUND VA VISUAL RUNNER
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-index="9">
+        <div class="slide-header">
+          <span class="slide-badge" style="background:rgba(16, 185, 129, 0.2); color:#6ee7b7;">10-Dars: Yakuniy Amaliyot</span>
+          <h2 class="slide-title">Kosmik Missiya: 3 Ta Qismni Ketma-Ket Bajarish!</h2>
+          <p class="slide-desc">
+            Robo-Do'st xonani tayyorlashi kerak. 3 ta kichik vazifani navbatma-navbat ishga tushiring:
+          </p>
+        </div>
+
+        <div class="interactive-board">
+          <div class="s10-playground-container">
+            <div class="code-editor-pane">
+              <div class="editor-top-bar">
+                <span style="font-size:0.75rem; color:#94a3b8; font-family:monospace;">missiya.py</span>
+                <span id="execStatusText" style="font-size:0.75rem; color:#38bdf8;">Tayyor holatda</span>
+              </div>
+
+              <div class="editor-code-body">
+                <div class="editor-line" id="line1"><span style="color:#475569;">1</span> <span><span style="color:#f472b6;">def</span> <span style="color:#38bdf8;">vazifani_bajar</span>():</span></div>
+                <div class="editor-line" id="line2"><span style="color:#475569;">2</span> <span>&nbsp;&nbsp;<span style="color:#38bdf8;">tozala</span>() <span style="color:#64748b;"># 1-qism</span></span></div>
+                <div class="editor-line" id="line3"><span style="color:#475569;">3</span> <span>&nbsp;&nbsp;<span style="color:#38bdf8;">chiroqni_ochir</span>() <span style="color:#64748b;"># 2-qism</span></span></div>
+                <div class="editor-line" id="line4"><span style="color:#475569;">4</span> <span>&nbsp;&nbsp;<span style="color:#38bdf8;">eshikni_yop</span>() <span style="color:#64748b;"># 3-qism</span></span></div>
+              </div>
+
+              <div style="padding:10px 14px; background:#111827; display:flex; justify-content:space-between; align-items:center;">
+                <button class="btn btn-primary" id="runCodeBtn" style="padding:8px 18px; font-size:0.88rem;">
+                  ▶️ Kodni Sinab Ko'rish
+                </button>
+              </div>
+            </div>
+
+            <div class="simulation-stage-pane">
+              <div style="background:#111827; padding:8px 14px; font-size:0.8rem; font-weight:700; color:#38bdf8; display:flex; justify-content:space-between;">
+                <span>Kosmik Xona Simulyatori</span>
+                <span id="missionProgressBadge">0/3 Bajarildi</span>
+              </div>
+
+              <div class="sim-canvas" id="simCanvas">
+                <div class="sim-target-station station-trash" id="stTrash"><span>🧹</span></div>
+                <div class="sim-target-station station-switch" id="stSwitch"><span id="switchIcon">💡</span></div>
+                <div class="sim-target-station station-door" id="stDoor"><span id="doorIcon">🚪</span></div>
+
+                <div class="sim-robot-avatar" id="simRobot">
+                  <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                    <rect x="3" y="10" width="18" height="12" rx="3" fill="#1e293b"></rect>
+                    <circle cx="8" cy="15" r="1.5" fill="#10b981"></circle>
+                    <circle cx="16" cy="15" r="1.5" fill="#10b981"></circle>
+                    <path d="M10 19h4" stroke-linecap="round"></path>
+                    <circle cx="12" cy="4" r="2" fill="#f59e0b" stroke="#f59e0b"></circle>
+                    <line x1="12" y1="6" x2="12" y2="10"></line>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GRAND VICTORY MODAL -->
+          <div class="grand-victory-modal" id="grandVictoryModal">
+            <div style="font-size:4rem; margin-bottom:10px;">🏆</div>
+            <h1 style="font-size:2rem; font-weight:900; background:linear-gradient(135deg, #fbbf24, #f59e0b, #ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:6px;">
+              Bo'laklash va Algoritmlar Ustasi!
+            </h1>
+            <p style="font-size:0.95rem; color:#cbd5e1; max-width:550px; margin-bottom:18px; line-height:1.5;">
+              Tabriklaymiz! Siz nafaqat hayotiy ishlarni (pitsa pishirish, xona yig'ish, chamadon tayyorlash), 
+              balki dasturlashdagi ulkan vazifalarni ham kichik qismlarga bo'lib, xatolarni bir zumda topib tuzatishni o'rgandingiz!
+            </p>
+            <button class="btn btn-primary" id="replayDeckBtn">🔄 1-Darsdan Qayta Boshlash</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- BOTTOM CONTROLLER -->
+  <footer class="app-footer">
+    <div style="font-size:0.75rem; color:#64748b;">
+      Navigatsiya: <kbd style="background:rgba(255,255,255,0.1); padding:2px 6px; border-radius:4px;">←</kbd> <kbd style="background:rgba(255,255,255,0.1); padding:2px 6px; border-radius:4px;">→</kbd> | Bo'sh joy: <kbd style="background:rgba(255,255,255,0.1); padding:2px 6px; border-radius:4px;">Space</kbd>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:12px;">
+      <button class="btn btn-secondary" id="prevSlideBtn" style="padding:8px 16px;">👈 Oldingi</button>
+      <span class="slide-counter-badge" id="slideCounterText">1 / 10</span>
+      <button class="btn btn-primary" id="nextSlideBtn" style="padding:8px 20px;">Keyingi 👉</button>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       JAVASCRIPT ARCHITECTURE
+       ========================================================================== -->
+  <script>
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+        this.muted = false;
+      }
+      init() {
+        if (!this.ctx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) this.ctx = new AudioContextClass();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+      }
+      playTone(freq, type = 'sine', duration = 0.12, vol = 0.15) {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+          gain.gain.setValueAtTime(vol, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + duration);
+        } catch (e) {}
+      }
+      playClick() { this.playTone(600, 'sine', 0.05, 0.1); }
+      playLaser() {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(900, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(80, this.ctx.currentTime + 0.35);
+          gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.35);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.35);
+        } catch (e) {}
+      }
+      playSnap() {
+        this.playTone(523.25, 'triangle', 0.1, 0.2);
+        setTimeout(() => this.playTone(659.25, 'sine', 0.15, 0.2), 60);
+      }
+      playSuccess() {
+        [523.25, 659.25, 783.99, 1046.50].forEach((f, i) => {
+          setTimeout(() => this.playTone(f, 'sine', 0.25, 0.2), i * 100);
+        });
+      }
+      playError() {
+        this.playTone(150, 'square', 0.18, 0.2);
+      }
+      playAssemble() {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(200, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(1200, this.ctx.currentTime + 0.5);
+          gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.5);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.5);
+        } catch (e) {}
+      }
+      playFanfare() {
+        [440, 554, 659, 880, 1108].forEach((f, i) => {
+          setTimeout(() => this.playTone(f, 'triangle', 0.35, 0.25), i * 120);
+        });
+      }
+      toggleMute() {
+        this.muted = !this.muted;
+        return this.muted;
+      }
+    }
+    const sound = new SoundEngine();
+
+    class ParticleFX {
+      constructor() {
+        this.canvas = document.getElementById('fx-canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        this.animate();
+      }
+      resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+      }
+      burst(x, y, count = 30, colors = ['#f59e0b', '#06b6d4', '#10b981', '#ec4899', '#38bdf8']) {
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 2 + Math.random() * 5;
+          this.particles.push({
+            x: x, y: y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 2,
+            size: 4 + Math.random() * 5,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            life: 1,
+            decay: 0.015 + Math.random() * 0.02,
+            gravity: 0.16
+          });
+        }
+      }
+      animate() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          const p = this.particles[i];
+          p.x += p.vx; p.y += p.vy; p.vy += p.gravity; p.life -= p.decay;
+          if (p.life <= 0) { this.particles.splice(i, 1); continue; }
+          this.ctx.save();
+          this.ctx.globalAlpha = p.life;
+          this.ctx.fillStyle = p.color;
+          this.ctx.beginPath();
+          this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          this.ctx.fill();
+          this.ctx.restore();
+        }
+        requestAnimationFrame(() => this.animate());
+      }
+    }
+    const fx = new ParticleFX();
+
+    /* ==========================================================================
+       SLIDE DECK CONTROLLER (10 SLIDES)
+       ========================================================================== */
+    class SlideDeck {
+      constructor() {
+        this.currentIndex = 0;
+        this.slides = document.querySelectorAll('.slide');
+        this.totalSlides = this.slides.length;
+        this.prevBtn = document.getElementById('prevSlideBtn');
+        this.nextBtn = document.getElementById('nextSlideBtn');
+        this.counterText = document.getElementById('slideCounterText');
+        this.stepDots = document.querySelectorAll('.step-dot');
+        this.init();
+      }
+      init() {
+        this.prevBtn.addEventListener('click', () => this.prev());
+        this.nextBtn.addEventListener('click', () => this.next());
+        this.stepDots.forEach(dot => {
+          dot.addEventListener('click', (e) => {
+            const target = parseInt(e.currentTarget.getAttribute('data-slide'));
+            this.goTo(target);
+          });
+        });
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') this.next();
+          else if (e.key === 'ArrowLeft') this.prev();
+          else if (e.key === ' ' && e.target.tagName !== 'INPUT') {
+            e.preventDefault();
+            this.triggerPrimaryAction();
+          }
+        });
+        this.updateUI();
+      }
+      goTo(index) {
+        if (index < 0 || index >= this.totalSlides || index === this.currentIndex) return;
+        sound.playClick();
+        this.slides[this.currentIndex].classList.remove('active');
+        this.slides[index].classList.add('active');
+        this.currentIndex = index;
+        this.updateUI();
+      }
+      next() { if (this.currentIndex < this.totalSlides - 1) this.goTo(this.currentIndex + 1); }
+      prev() { if (this.currentIndex > 0) this.goTo(this.currentIndex - 1); }
+      updateUI() {
+        this.counterText.textContent = `${this.currentIndex + 1} / ${this.totalSlides}`;
+        this.prevBtn.disabled = this.currentIndex === 0;
+        this.prevBtn.style.opacity = this.currentIndex === 0 ? '0.4' : '1';
+        this.nextBtn.textContent = this.currentIndex === this.totalSlides - 1 ? 'Tugatish 🏆' : 'Keyingi 👉';
+        this.stepDots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === this.currentIndex);
+          dot.classList.toggle('completed', idx < this.currentIndex);
+        });
+      }
+      triggerPrimaryAction() {
+        if (this.currentIndex === 0) document.getElementById('s1SliceBtn').click();
+        else if (this.currentIndex === 9) document.getElementById('runCodeBtn').click();
+      }
+    }
+    const deck = new SlideDeck();
+
+    /* ==========================================================================
+       SLIDE 1: MONOLITH SLICE
+       ========================================================================== */
+    class Slide1Controller {
+      constructor() {
+        this.monolith = document.getElementById('giantMonolith');
+        this.sliceBtn = document.getElementById('s1SliceBtn');
+        this.laserLine = document.getElementById('laserSlash');
+        this.splitModules = document.getElementById('splitModules');
+        this.takeaway = document.getElementById('s1Takeaway');
+        this.isSliced = false;
+        this.init();
+      }
+      init() {
+        this.sliceBtn.addEventListener('click', () => this.slice());
+        this.monolith.addEventListener('click', () => this.slice());
+      }
+      slice() {
+        if (this.isSliced) return;
+        this.isSliced = true;
+        sound.playLaser();
+        const rect = this.monolith.getBoundingClientRect();
+        this.laserLine.style.top = '50%';
+        this.laserLine.style.left = '10%';
+        this.laserLine.style.width = '80%';
+        this.laserLine.style.transform = 'rotate(-15deg)';
+        this.laserLine.style.opacity = '1';
+        fx.burst(rect.left + rect.width / 2, rect.top + rect.height / 2, 40);
+        setTimeout(() => {
+          this.laserLine.style.opacity = '0';
+          this.monolith.style.display = 'none';
+          this.splitModules.style.display = 'flex';
+          this.takeaway.style.display = 'inline-block';
+          this.sliceBtn.innerHTML = '✨ 3 Qismga Bo\'lindi!';
+          this.sliceBtn.disabled = true;
+          sound.playSuccess();
+        }, 300);
+      }
+      reset() {
+        this.isSliced = false;
+        this.monolith.style.display = 'flex';
+        this.splitModules.style.display = 'none';
+        this.takeaway.style.display = 'none';
+        this.sliceBtn.innerHTML = '⚡ Lazer Bilan 3 Qismga Bo\'lish!';
+        this.sliceBtn.disabled = false;
+      }
+    }
+    const s1 = new Slide1Controller();
+
+    /* ==========================================================================
+       SLIDE 2: HAYOTIY MISOL 1 (PITSA TAYYORLASH)
+       ========================================================================== */
+    class Slide2Controller {
+      constructor() {
+        this.step = 0;
+        this.btn1 = document.getElementById('btnPizzaStep1');
+        this.btn2 = document.getElementById('btnPizzaStep2');
+        this.btn3 = document.getElementById('btnPizzaStep3');
+        this.crust = document.getElementById('pizzaCrust');
+        this.sauce = document.getElementById('pizzaSauce');
+        this.toppings = document.getElementById('pizzaToppings');
+        this.pan = document.getElementById('pizzaPan');
+        this.label = document.getElementById('pizzaResultLabel');
+        this.status = document.getElementById('pizzaStatusBanner');
+        this.init();
+      }
+      init() {
+        this.btn1.addEventListener('click', () => {
+          sound.playSnap();
+          this.crust.style.opacity = '1';
+          this.crust.style.transform = 'scale(1)';
+          this.btn1.disabled = true;
+          this.btn2.disabled = false;
+          document.getElementById('pizzaCard1').classList.add('done-step');
+          document.getElementById('pizzaCard2').classList.add('active-step');
+          this.label.textContent = '1-qism: Xamir qorildi!';
+          this.status.textContent = '👉 2-bosqich: Endi sous va masalliqlarni tering!';
+          const r = this.pan.getBoundingClientRect();
+          fx.burst(r.left + 100, r.top + 100, 15);
+        });
+
+        this.btn2.addEventListener('click', () => {
+          sound.playSnap();
+          this.sauce.style.opacity = '1';
+          this.toppings.style.opacity = '1';
+          this.btn2.disabled = true;
+          this.btn3.disabled = false;
+          document.getElementById('pizzaCard2').classList.add('done-step');
+          document.getElementById('pizzaCard3').classList.add('active-step');
+          this.label.textContent = '2-qism: Masalliqlar terildi!';
+          this.status.textContent = '👉 3-bosqich: Pechda pishirish tugmasini bosing!';
+          const r = this.pan.getBoundingClientRect();
+          fx.burst(r.left + 100, r.top + 100, 20);
+        });
+
+        this.btn3.addEventListener('click', () => {
+          sound.playAssemble();
+          this.pan.classList.add('pizza-baked-glow');
+          this.crust.style.background = '#d97706';
+          this.btn3.disabled = true;
+          document.getElementById('pizzaCard3').classList.add('done-step');
+          this.label.innerHTML = '🍕 Mazali Pitsa Tayyor!';
+          this.status.innerHTML = '🎉 <strong>Muvaffaqiyat:</strong> Katta vazifa 3 ta oson bosqichda pishirildi!';
+          sound.playSuccess();
+          const r = this.pan.getBoundingClientRect();
+          fx.burst(r.left + 100, r.top + 100, 40);
+        });
+      }
+      reset() {
+        this.btn1.disabled = false;
+        this.btn2.disabled = true;
+        this.btn3.disabled = true;
+        this.crust.style.opacity = '0';
+        this.sauce.style.opacity = '0';
+        this.toppings.style.opacity = '0';
+        this.pan.classList.remove('pizza-baked-glow');
+        this.crust.style.background = '#e2e8f0';
+        this.label.textContent = 'Bo\'sh tova kutilmoqda...';
+        this.status.textContent = '👉 1-bosqich: Avval xamirni qoring!';
+        ['pizzaCard1', 'pizzaCard2', 'pizzaCard3'].forEach(id => {
+          const el = document.getElementById(id);
+          el.classList.remove('active-step', 'done-step');
+        });
+        document.getElementById('pizzaCard1').classList.add('active-step');
+      }
+    }
+    const s2 = new Slide2Controller();
+
+    /* ==========================================================================
+       SLIDE 3: HAYOTIY MISOL 2 (XONA TOZALASH)
+       ========================================================================== */
+    class Slide3Controller {
+      constructor() {
+        this.desk = document.getElementById('zoneDesk');
+        this.floor = document.getElementById('zoneFloor');
+        this.bed = document.getElementById('zoneBed');
+        this.fill = document.getElementById('roomProgressFill');
+        this.percent = document.getElementById('roomCleanPercent');
+        this.banner = document.getElementById('roomSuccessBanner');
+        this.cleaned = { desk: false, floor: false, bed: false };
+        this.init();
+      }
+      init() {
+        this.desk.addEventListener('click', () => this.clean('desk', this.desk, 'badgeDesk', '✅ Taxlandi!'));
+        this.floor.addEventListener('click', () => this.clean('floor', this.floor, 'badgeFloor', '✅ Yig\'ildi!'));
+        this.bed.addEventListener('click', () => this.clean('bed', this.bed, 'badgeBed', '✅ Ilindi!'));
+      }
+      clean(key, el, badgeId, text) {
+        if (this.cleaned[key]) return;
+        this.cleaned[key] = true;
+        sound.playSnap();
+        el.classList.add('cleaned');
+        document.getElementById(badgeId).textContent = text;
+        const count = Object.values(this.cleaned).filter(Boolean).length;
+        const pct = Math.round((count / 3) * 100);
+        this.fill.style.width = `${pct}%`;
+        this.percent.textContent = `${pct}%`;
+        const r = el.getBoundingClientRect();
+        fx.burst(r.left + r.width / 2, r.top + r.height / 2, 20);
+        if (count === 3) {
+          sound.playSuccess();
+          this.banner.style.display = 'block';
+        }
+      }
+      reset() {
+        this.cleaned = { desk: false, floor: false, bed: false };
+        [this.desk, this.floor, this.bed].forEach(el => el.classList.remove('cleaned'));
+        document.getElementById('badgeDesk').textContent = '❌ Tartibsiz';
+        document.getElementById('badgeFloor').textContent = '❌ Tarqoq';
+        document.getElementById('badgeBed').textContent = '❌ Yoyilgan';
+        this.fill.style.width = '0%';
+        this.percent.textContent = '0%';
+        this.banner.style.display = 'none';
+      }
+    }
+    const s3 = new Slide3Controller();
+
+    /* ==========================================================================
+       SLIDE 4: HAYOTIY MISOL 3 (CHAMADON YIG'ISH)
+       ========================================================================== */
+    class Slide4Controller {
+      constructor() {
+        this.pool = document.getElementById('luggageItemsPool');
+        this.items = document.querySelectorAll('.luggage-item-chip');
+        this.pockets = document.querySelectorAll('.luggage-pocket');
+        this.winMsg = document.getElementById('luggageWinMsg');
+        this.counts = { clothes: 0, docs: 0, gadgets: 0 };
+        this.selected = null;
+        this.init();
+      }
+      init() {
+        this.items.forEach(item => {
+          item.addEventListener('click', () => {
+            if (item.parentElement.classList.contains('pocket-list')) return;
+            sound.playClick();
+            if (this.selected === item) {
+              item.classList.remove('selected');
+              this.selected = null;
+            } else {
+              if (this.selected) this.selected.classList.remove('selected');
+              this.selected = item;
+              item.classList.add('selected');
+            }
+          });
+        });
+
+        this.pockets.forEach(pocket => {
+          pocket.addEventListener('click', () => {
+            if (!this.selected) return;
+            const itemCat = this.selected.getAttribute('data-category');
+            const pocketCat = pocket.getAttribute('data-accept');
+            if (itemCat === pocketCat) {
+              sound.playSnap();
+              const list = pocket.querySelector('.pocket-list');
+              list.appendChild(this.selected);
+              this.selected.classList.remove('selected');
+              this.selected = null;
+              this.counts[pocketCat]++;
+              document.getElementById(`count${pocketCat.charAt(0).toUpperCase() + pocketCat.slice(1)}`).textContent = `${this.counts[pocketCat]}/2`;
+              const r = pocket.getBoundingClientRect();
+              fx.burst(r.left + r.width / 2, r.top + 50, 15);
+              if (this.counts.clothes + this.counts.docs + this.counts.gadgets === 6) {
+                sound.playSuccess();
+                this.winMsg.style.display = 'block';
+              }
+            } else {
+              sound.playError();
+            }
+          });
+        });
+      }
+      reset() {
+        this.counts = { clothes: 0, docs: 0, gadgets: 0 };
+        this.winMsg.style.display = 'none';
+        this.selected = null;
+        document.getElementById('countClothes').textContent = '0/2';
+        document.getElementById('countDocs').textContent = '0/2';
+        document.getElementById('countGadgets').textContent = '0/2';
+        this.items.forEach(i => {
+          i.classList.remove('selected');
+          this.pool.appendChild(i);
+        });
+      }
+    }
+    const s4 = new Slide4Controller();
+
+    /* ==========================================================================
+       SLIDE 5: ROBOT VAZIFALARINI SARALASH
+       ========================================================================== */
+    class Slide5Controller {
+      constructor() {
+        this.pool = document.getElementById('taskCardsPool');
+        this.chips = document.querySelectorAll('.task-chip');
+        this.bins = document.querySelectorAll('.bin-container');
+        this.winBanner = document.getElementById('s5WinBanner');
+        this.selected = null;
+        this.counts = { energy: 0, motion: 0, sensor: 0 };
+        this.init();
+      }
+      init() {
+        this.chips.forEach(chip => {
+          chip.addEventListener('click', () => {
+            if (chip.parentElement.classList.contains('bin-items-list')) return;
+            sound.playClick();
+            if (this.selected === chip) {
+              chip.classList.remove('selected');
+              this.selected = null;
+            } else {
+              if (this.selected) this.selected.classList.remove('selected');
+              this.selected = chip;
+              chip.classList.add('selected');
+            }
+          });
+        });
+
+        this.bins.forEach(bin => {
+          bin.addEventListener('click', () => {
+            if (!this.selected) return;
+            const type = this.selected.getAttribute('data-type');
+            const accept = bin.getAttribute('data-accept');
+            if (type === accept) {
+              sound.playSnap();
+              bin.querySelector('.bin-items-list').appendChild(this.selected);
+              this.selected.classList.remove('selected');
+              this.selected = null;
+              this.counts[type]++;
+              document.getElementById(`counter${type.charAt(0).toUpperCase() + type.slice(1)}`).textContent = `${this.counts[type]}/2`;
+              const r = bin.getBoundingClientRect();
+              fx.burst(r.left + r.width / 2, r.top + 60, 15);
+              if (this.counts.energy + this.counts.motion + this.counts.sensor === 6) {
+                sound.playSuccess();
+                this.winBanner.style.display = 'block';
+              }
+            } else {
+              sound.playError();
+            }
+          });
+        });
+      }
+      reset() {
+        this.counts = { energy: 0, motion: 0, sensor: 0 };
+        this.winBanner.style.display = 'none';
+        this.selected = null;
+        document.getElementById('counterEnergy').textContent = '0/2';
+        document.getElementById('counterMotion').textContent = '0/2';
+        document.getElementById('counterSensor').textContent = '0/2';
+        this.chips.forEach(c => {
+          c.classList.remove('selected');
+          this.pool.appendChild(c);
+        });
+      }
+    }
+    const s5 = new Slide5Controller();
+
+    /* ==========================================================================
+       SLIDE 6: PIPELINE WORKSTATIONS & ASSEMBLE
+       ========================================================================== */
+    class Slide6Controller {
+      constructor() {
+        this.battery = document.getElementById('batterySlider');
+        this.rpm = document.getElementById('rpmSlider');
+        this.freqBtns = document.querySelectorAll('.freq-btn');
+        this.assembleBtn = document.getElementById('assembleRobotBtn');
+        this.modal = document.getElementById('assembledModal');
+        this.solved = { a: false, b: false, c: false };
+        this.init();
+      }
+      init() {
+        this.battery.addEventListener('input', (e) => {
+          const val = parseInt(e.target.value);
+          document.getElementById('batteryFill').style.width = `${val}%`;
+          if (val >= 95) {
+            this.solved.a = true;
+            sound.playSnap();
+            document.getElementById('statusA').textContent = '✅ Quvvat: 100% (Tayyor!)';
+            this.check();
+          } else {
+            this.solved.a = false;
+            document.getElementById('statusA').textContent = `⏳ Quvvat: ${val}%`;
+          }
+        });
+
+        this.rpm.addEventListener('input', (e) => {
+          const val = parseInt(e.target.value);
+          if (val >= 60 && val <= 80) {
+            this.solved.b = true;
+            sound.playSnap();
+            document.getElementById('statusB').textContent = `✅ Tezlik: ${val} RPM (Ideal!)`;
+            this.check();
+          } else {
+            this.solved.b = false;
+            document.getElementById('statusB').textContent = `⏳ Tezlik: ${val} RPM`;
+          }
+        });
+
+        this.freqBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            sound.playClick();
+            if (btn.getAttribute('data-freq') === 'green') {
+              this.solved.c = true;
+              sound.playSnap();
+              document.getElementById('statusC').textContent = '✅ Sensor ochiq (100%!)';
+              this.check();
+            } else {
+              this.solved.c = false;
+              document.getElementById('statusC').textContent = '⏳ Noto\'g\'ri to\'lqin';
+            }
+          });
+        });
+
+        this.assembleBtn.addEventListener('click', () => {
+          sound.playAssemble();
+          this.modal.style.display = 'flex';
+        });
+
+        document.getElementById('closeAssembleModalBtn').addEventListener('click', () => {
+          this.modal.style.display = 'none';
+          deck.next();
+        });
+      }
+      check() {
+        if (this.solved.a && this.solved.b && this.solved.c) {
+          sound.playSuccess();
+          this.assembleBtn.style.display = 'inline-flex';
+        }
+      }
+      reset() {
+        this.solved = { a: false, b: false, c: false };
+        this.battery.value = 20;
+        document.getElementById('batteryFill').style.width = '20%';
+        this.rpm.value = 10;
+        document.getElementById('statusA').textContent = '⏳ Quvvat: 20%';
+        document.getElementById('statusB').textContent = '⏳ Tezlik: 10 RPM';
+        document.getElementById('statusC').textContent = '⏳ To\'lqin kutilmoqda';
+        this.assembleBtn.style.display = 'none';
+        this.modal.style.display = 'none';
+      }
+    }
+    const s6 = new Slide6Controller();
+
+    /* ==========================================================================
+       SLIDE 7: MONOLITH VS FUNCTIONS
+       ========================================================================== */
+    class Slide7Controller {
+      constructor() {
+        this.fb = document.getElementById('s7Feedback');
+        this.init();
+      }
+      init() {
+        document.getElementById('testMonolithBtn').addEventListener('click', () => {
+          sound.playError();
+          this.fb.innerHTML = '💥 <strong>Chalkash Kod Xatosi:</strong> Qaysi qatorda xato borligi noma\'lum! Butun dastur to\'xtadi!';
+        });
+        document.getElementById('testFuncEnergyBtn').addEventListener('click', () => {
+          sound.playSnap();
+          this.fb.innerHTML = '⚡ <strong>quvvatniYoq()</strong> sinovi o\'tdi! Boshqa qismlar bezovta qilinmadi.';
+        });
+        document.getElementById('testFuncMotionBtn').addEventListener('click', () => {
+          sound.playSnap();
+          this.fb.innerHTML = '⚙️ <strong>yurishniBoshla()</strong> mustaqil qismi me\'yorda ishlayapti!';
+        });
+        document.getElementById('testFuncSensorBtn').addEventListener('click', () => {
+          sound.playSnap();
+          this.fb.innerHTML = '🧠 <strong>xaritaniChiz()</strong> sensori o\'z vazifasini toza bajardi!';
+        });
+      }
+      reset() {
+        this.fb.innerHTML = '💡 <strong>Tushuntirish:</strong> Tugmalarni bosib, funksiyalarni alohida-alohida tekshiring!';
+      }
+    }
+    const s7 = new Slide7Controller();
+
+    /* ==========================================================================
+       SLIDE 8: REFAKTORING (SPAGHETTI -> FUNKSIYALAR)
+       ========================================================================== */
+    class Slide8Controller {
+      constructor() {
+        this.pool = document.querySelector('.unorganized-code-box');
+        this.lines = document.querySelectorAll('.draggable-code-line');
+        this.boxes = document.querySelectorAll('.target-function-box');
+        this.banner = document.getElementById('s8WinBanner');
+        this.selected = null;
+        this.counts = { energy: 0, motion: 0, sensor: 0 };
+        this.init();
+      }
+      init() {
+        this.lines.forEach(line => {
+          line.addEventListener('click', () => {
+            if (line.parentElement.classList.contains('fn-content')) return;
+            sound.playClick();
+            if (this.selected === line) {
+              line.classList.remove('selected');
+              this.selected = null;
+            } else {
+              if (this.selected) this.selected.classList.remove('selected');
+              this.selected = line;
+              line.classList.add('selected');
+            }
+          });
+        });
+
+        this.boxes.forEach(box => {
+          box.addEventListener('click', () => {
+            if (!this.selected) return;
+            const lineCat = this.selected.getAttribute('data-cat');
+            const boxCat = box.getAttribute('data-fn');
+            if (lineCat === boxCat) {
+              sound.playSnap();
+              box.querySelector('.fn-content').appendChild(this.selected);
+              this.selected.classList.remove('selected');
+              this.selected = null;
+              this.counts[boxCat]++;
+              document.getElementById(`refactorCount${boxCat.charAt(0).toUpperCase() + boxCat.slice(1)}`).textContent = `(${this.counts[boxCat]}/2)`;
+              const r = box.getBoundingClientRect();
+              fx.burst(r.left + r.width / 2, r.top + 30, 15);
+              if (this.counts.energy + this.counts.motion + this.counts.sensor === 6) {
+                sound.playSuccess();
+                this.banner.style.display = 'block';
+              }
+            } else {
+              sound.playError();
+            }
+          });
+        });
+      }
+      reset() {
+        this.counts = { energy: 0, motion: 0, sensor: 0 };
+        this.banner.style.display = 'none';
+        this.selected = null;
+        document.getElementById('refactorCountEnergy').textContent = '(0/2)';
+        document.getElementById('refactorCountMotion').textContent = '(0/2)';
+        document.getElementById('refactorCountSensor').textContent = '(0/2)';
+        this.lines.forEach(l => {
+          l.classList.remove('selected');
+          this.pool.appendChild(l);
+        });
+      }
+    }
+    const s8 = new Slide8Controller();
+
+    /* ==========================================================================
+       SLIDE 9: DEBUGGING VIA DECOMPOSITION
+       ========================================================================== */
+    class Slide9Controller {
+      constructor() {
+        this.btnEnergy = document.getElementById('btnTestDiagEnergy');
+        this.btnSensor = document.getElementById('btnTestDiagSensor');
+        this.btnMotion = document.getElementById('btnTestDiagMotion');
+        this.fixPanel = document.getElementById('bugFixPanel');
+        this.btnFix = document.getElementById('btnApplyBugFix');
+        this.statusLabel = document.getElementById('debugStatusLabel');
+        this.init();
+      }
+      init() {
+        this.btnEnergy.addEventListener('click', () => {
+          sound.playSnap();
+          document.getElementById('diagRowEnergy').classList.add('fixed');
+          document.getElementById('diagEnergyDesc').textContent = '✅ Quvvat: 100% Me\'yorda';
+        });
+
+        this.btnSensor.addEventListener('click', () => {
+          sound.playSnap();
+          document.getElementById('diagRowSensor').classList.add('fixed');
+          document.getElementById('diagSensorDesc').textContent = '✅ Sensor: To\'siqlar yo\'q';
+        });
+
+        this.btnMotion.addEventListener('click', () => {
+          sound.playError();
+          document.getElementById('diagRowMotion').classList.add('has-bug');
+          document.getElementById('diagMotionDesc').textContent = '❌ XATO: motor_tezligi = 0 !';
+          this.fixPanel.style.display = 'block';
+        });
+
+        this.btnFix.addEventListener('click', () => {
+          sound.playSuccess();
+          this.fixPanel.style.display = 'none';
+          const r = document.getElementById('diagRowMotion');
+          r.classList.remove('has-bug');
+          r.classList.add('fixed');
+          document.getElementById('diagMotionDesc').textContent = '✅ Tuzatildi: motor_tezligi = 80!';
+          this.statusLabel.textContent = '🎉 Robo-Do\'st muvaffaqiyatli tiklandi!';
+          this.statusLabel.style.color = '#10b981';
+          document.getElementById('debugRobotIcon').textContent = '🚀';
+          fx.burst(window.innerWidth / 2, window.innerHeight / 2, 40);
+        });
+      }
+      reset() {
+        ['diagRowEnergy', 'diagRowSensor', 'diagRowMotion'].forEach(id => {
+          const el = document.getElementById(id);
+          el.classList.remove('fixed', 'has-bug');
+        });
+        document.getElementById('diagEnergyDesc').textContent = 'Sinov kutilmoqda';
+        document.getElementById('diagSensorDesc').textContent = 'Sinov kutilmoqda';
+        document.getElementById('diagMotionDesc').textContent = 'Sinov kutilmoqda';
+        this.fixPanel.style.display = 'none';
+        this.statusLabel.textContent = '⚠️ Xatolik bor: Harakat to\'xtagan!';
+        this.statusLabel.style.color = '#ef4444';
+        document.getElementById('debugRobotIcon').textContent = '🤖';
+      }
+    }
+    const s9 = new Slide9Controller();
+
+    /* ==========================================================================
+       SLIDE 10: KOD PLAYGROUND & RUNNER
+       ========================================================================== */
+    class Slide10Controller {
+      constructor() {
+        this.runBtn = document.getElementById('runCodeBtn');
+        this.statusText = document.getElementById('execStatusText');
+        this.badgeProgress = document.getElementById('missionProgressBadge');
+        this.stTrash = document.getElementById('stTrash');
+        this.stSwitch = document.getElementById('stSwitch');
+        this.stDoor = document.getElementById('stDoor');
+        this.robot = document.getElementById('simRobot');
+        this.modal = document.getElementById('grandVictoryModal');
+        this.isRunning = false;
+        this.init();
+      }
+      init() {
+        this.runBtn.addEventListener('click', () => this.run());
+        document.getElementById('replayDeckBtn').addEventListener('click', () => {
+          this.modal.style.display = 'none';
+          deck.goTo(0);
+        });
+      }
+      run() {
+        if (this.isRunning) return;
+        this.isRunning = true;
+        this.runBtn.disabled = true;
+        this.statusText.textContent = 'Kod bajarilmoqda...';
+
+        // Step 1: line 2 (tozala)
+        this.highlight(document.getElementById('line2'));
+        sound.playTone(400, 'sine', 0.1);
+        this.robot.style.left = '35px';
+        this.robot.style.bottom = '150px';
+
+        setTimeout(() => {
+          sound.playSnap();
+          this.stTrash.style.borderColor = '#10b981';
+          this.stTrash.innerHTML = '<span>✨</span>';
+          this.badgeProgress.textContent = '1/3 Bajarildi';
+
+          // Step 2: line 3 (chiroqni_ochir)
+          setTimeout(() => {
+            this.highlight(document.getElementById('line3'));
+            sound.playTone(500, 'sine', 0.1);
+            this.robot.style.left = 'calc(100% - 90px)';
+            this.robot.style.bottom = '150px';
+
+            setTimeout(() => {
+              sound.playSnap();
+              this.stSwitch.style.borderColor = '#10b981';
+              document.getElementById('switchIcon').textContent = '🌙';
+              this.badgeProgress.textContent = '2/3 Bajarildi';
+
+              // Step 3: line 4 (eshikni_yop)
+              setTimeout(() => {
+                this.highlight(document.getElementById('line4'));
+                sound.playTone(600, 'sine', 0.1);
+                this.robot.style.left = 'calc(100% - 90px)';
+                this.robot.style.bottom = '35px';
+
+                setTimeout(() => {
+                  sound.playSnap();
+                  this.stDoor.style.borderColor = '#10b981';
+                  document.getElementById('doorIcon').textContent = '🔒';
+                  this.badgeProgress.textContent = '3/3 Bajarildi!';
+
+                  setTimeout(() => {
+                    this.clearHighlight();
+                    this.robot.style.left = 'calc(50% - 25px)';
+                    this.robot.style.bottom = '80px';
+                    setTimeout(() => {
+                      sound.playFanfare();
+                      this.modal.style.display = 'flex';
+                      fx.burst(window.innerWidth / 2, window.innerHeight / 2, 70);
+                      this.isRunning = false;
+                      this.runBtn.disabled = false;
+                      this.statusText.textContent = 'Missiya yakunlandi!';
+                    }, 700);
+                  }, 500);
+                }, 700);
+              }, 600);
+            }, 700);
+          }, 600);
+        }, 700);
+      }
+      highlight(el) {
+        this.clearHighlight();
+        el.classList.add('active-executing');
+      }
+      clearHighlight() {
+        ['line1', 'line2', 'line3', 'line4'].forEach(id => {
+          document.getElementById(id).classList.remove('active-executing');
+        });
+      }
+      reset() {
+        this.isRunning = false;
+        this.runBtn.disabled = false;
+        this.statusText.textContent = 'Tayyor holatda';
+        this.badgeProgress.textContent = '0/3 Bajarildi';
+        this.clearHighlight();
+        this.robot.style.left = '35px';
+        this.robot.style.bottom = '35px';
+        this.stTrash.style.borderColor = '';
+        this.stTrash.innerHTML = '<span>🧹</span>';
+        this.stSwitch.style.borderColor = '';
+        document.getElementById('switchIcon').textContent = '💡';
+        this.stDoor.style.borderColor = '';
+        document.getElementById('doorIcon').textContent = '🚪';
+        this.modal.style.display = 'none';
+      }
+    }
+    const s10 = new Slide10Controller();
+
+    /* Global slide reset */
+    document.getElementById('restartSlideBtn').addEventListener('click', () => {
+      sound.playClick();
+      const c = deck.currentIndex;
+      if (c === 0) s1.reset();
+      else if (c === 1) s2.reset();
+      else if (c === 2) s3.reset();
+      else if (c === 3) s4.reset();
+      else if (c === 4) s5.reset();
+      else if (c === 5) s6.reset();
+      else if (c === 6) s7.reset();
+      else if (c === 7) s8.reset();
+      else if (c === 8) s9.reset();
+      else if (c === 9) s10.reset();
+    });
+
+    /* Audio toggle */
+    const soundBtn = document.getElementById('soundToggleBtn');
+    const soundOn = document.getElementById('soundIconOn');
+    const soundOff = document.getElementById('soundIconOff');
+    soundBtn.addEventListener('click', () => {
+      const isMuted = sound.toggleMute();
+      soundOn.style.display = isMuted ? 'none' : 'block';
+      soundOff.style.display = isMuted ? 'block' : 'none';
+      if (!isMuted) sound.playClick();
+    });
+
+    document.body.addEventListener('click', () => sound.init(), { once: true });
+  </script>
+</body>
+</html>
